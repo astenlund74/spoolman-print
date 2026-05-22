@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: spoolman-print
+  namespace: spoolman
+  annotations:
+    # Adjust cert-manager cluster-issuer name to match your cluster setup.
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+spec:
+  ingressClassName: traefik
+  rules:
+    - host: spoolmanprint.YOUR_DOMAIN
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: spoolman-print
+                port:
+                  number: 80
+  tls:
+    - hosts:
+        - spoolmanprint.YOUR_DOMAIN
+      secretName: spoolman-print-tls

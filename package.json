@@ -1,0 +1,26 @@
+{
+  "name": "spoolman-print",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "postinstall": "node scripts/copy-lzma.js"
+  },
+  "dependencies": {
+    "qrcode": "^1.5.4",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@types/qrcode": "^1.5.5",
+    "@types/react": "^19.1.4",
+    "@types/react-dom": "^19.1.5",
+    "@types/w3c-web-hid": "^1.0.6",
+    "@vitejs/plugin-react": "^4.4.1",
+    "lzma": "^2.3.2",
+    "typescript": "^5.8.3",
+    "vite": "^6.3.5"
+  }
+}

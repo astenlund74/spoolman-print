@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spoolman-print
+  namespace: spoolman
+  labels:
+    app: spoolman-print
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spoolman-print
+  template:
+    metadata:
+      labels:
+        app: spoolman-print
+    spec:
+      containers:
+        - name: spoolman-print
+          image: YOUR_REGISTRY/spoolman-print:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          env:
+            - name: SPOOLMAN_URL
+              # Internal cluster URL of the Spoolman service.
+              # Adjust namespace/service name to match your cluster.
+              value: "http://spoolman.YOUR_NAMESPACE.svc.cluster.local:8000"
+            - name: SPOOLMANSYNC_URL
+              value: "http://spoolmansync.YOUR_NAMESPACE.svc.cluster.local:3000"
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "32Mi"
+            limits:
+              cpu: "200m"
+              memory: "64Mi"

@@ -1,0 +1,9 @@
+node_modules/
+dist/
+
+# Local dev environment — copy to .env.local and fill in your URLs
+.env.local
+.env.*.local
+
+*.log
+.DS_Store

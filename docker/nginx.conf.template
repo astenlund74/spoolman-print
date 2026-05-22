@@ -1,0 +1,36 @@
+server {
+    listen 80;
+    server_name _;
+    root /usr/share/nginx/html;
+    index index.html;
+
+    # Proxy Spoolman API — avoids CORS entirely.
+    # ${SPOOLMAN_URL} is replaced at container startup via envsubst.
+    location /api/ {
+        proxy_pass ${SPOOLMAN_URL}/api/v1/;
+        proxy_set_header Host $http_host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_read_timeout 30s;
+    }
+
+    # Proxy SpoolmanSync API — ${SPOOLMANSYNC_URL} replaced at startup.
+    location /spoolmansync-api/ {
+        proxy_pass ${SPOOLMANSYNC_URL}/api/;
+        proxy_set_header Host $http_host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_read_timeout 30s;
+    }
+
+    # SPA fallback
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+
+    # Cache static assets
+    location ~* \.(js|css|png|ico|svg|woff2?)$ {
+        expires 1d;
+        add_header Cache-Control "public, immutable";
+    }
+}
