@@ -19,7 +19,7 @@
 
 set -euo pipefail
 
-IMAGE="${IMAGE:-stenlund/spoolman-print}"
+IMAGE="${IMAGE:-ghcr.io/astenlund74/spoolman-print}"
 PLATFORM="${PLATFORM:-linux/amd64}"
 VERSION="${1:-$(git describe --tags --exact-match 2>/dev/null || git rev-parse --short HEAD)}"
 

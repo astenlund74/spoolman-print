@@ -53,11 +53,11 @@ The nginx reverse proxy inside the container handles the `/api` and `/spoolmansy
 ## Building and pushing to a registry
 
 ```bash
-# Build and push :latest + :<version> to Docker Hub
+# Build and push :latest + :<version> to ghcr.io
 ./scripts/build-push.sh v1.0.0
 
 # Use a different registry
-IMAGE=ghcr.io/youruser/spoolman-print ./scripts/build-push.sh v1.0.0
+IMAGE=docker.io/youruser/spoolman-print ./scripts/build-push.sh v1.0.0
 
 # Multi-arch (amd64 + arm64)
 PLATFORM=linux/amd64,linux/arm64 ./scripts/build-push.sh v1.0.0

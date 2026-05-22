@@ -17,8 +17,8 @@ spec:
     spec:
       containers:
         - name: spoolman-print
-          image: YOUR_REGISTRY/spoolman-print:latest
-          imagePullPolicy: Always
+          image: ghcr.io/astenlund74/spoolman-print:latest  # or pin to a specific tag
+          imagePullPolicy: Always  # ghcr.io public image, no pull secret needed
           ports:
             - containerPort: 80
           env:
